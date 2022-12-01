@@ -1,0 +1,679 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ip21Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Animals">
+          <Key>
+            <PropertyRef Name="Iid animals" />
+          </Key>
+          <Property Name="Iid animals" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nickname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date of birth" Type="date" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="View" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Floor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id breed" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Breed">
+          <Key>
+            <PropertyRef Name="Iid breed" />
+          </Key>
+          <Property Name="Iid breed" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Id types of animals" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id client" />
+          </Key>
+          <Property Name="id client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client\animals">
+          <Key>
+            <PropertyRef Name="id Client\animals" />
+          </Key>
+          <Property Name="id Client\animals" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id client" Type="int" Nullable="false" />
+          <Property Name="id animals" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entry">
+          <Key>
+            <PropertyRef Name="Iid entry" />
+          </Key>
+          <Property Name="Iid entry" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id admina" Type="int" Nullable="false" />
+          <Property Name="Id client" Type="int" Nullable="false" />
+          <Property Name="Date reception" Type="date" Nullable="false" />
+          <Property Name="Time reception" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Service" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id veterinarian" Type="int" Nullable="false" />
+          <Property Name="Id animal" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reception">
+          <Key>
+            <PropertyRef Name="Iid reception" />
+          </Key>
+          <Property Name="Iid reception" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id entry" Type="int" Nullable="false" />
+          <Property Name="Diagnosis" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Recommendations" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Duration of treatment" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prescription of medicines" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id role" />
+          </Key>
+          <Property Name="id role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Types of animals">
+          <Key>
+            <PropertyRef Name="Iid Types of animals" />
+          </Key>
+          <Property Name="Iid Types of animals" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Species name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id user" />
+          </Key>
+          <Property Name="id user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id role" Type="int" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Animals_Breed">
+          <End Role="Breed" Type="Self.Breed" Multiplicity="1" />
+          <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Breed">
+              <PropertyRef Name="Iid breed" />
+            </Principal>
+            <Dependent Role="Animals">
+              <PropertyRef Name="Id breed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Breed_Types of animals">
+          <End Role="Types of animals" Type="Self.Types of animals" Multiplicity="1" />
+          <End Role="Breed" Type="Self.Breed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types of animals">
+              <PropertyRef Name="Iid Types of animals" />
+            </Principal>
+            <Dependent Role="Breed">
+              <PropertyRef Name="Id types of animals" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client\animals_Animals">
+          <End Role="Animals" Type="Self.Animals" Multiplicity="1" />
+          <End Role="Client\animals" Type="Self.Client\animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animals">
+              <PropertyRef Name="Iid animals" />
+            </Principal>
+            <Dependent Role="Client\animals">
+              <PropertyRef Name="id animals" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client\animals_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Client\animals" Type="Self.Client\animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id client" />
+            </Principal>
+            <Dependent Role="Client\animals">
+              <PropertyRef Name="id client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entry_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Entry" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id client" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="Id client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entry_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Entry" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id user" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="Id admina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entry_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Entry" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id user" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="Id veterinarian" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reception_Entry">
+          <End Role="Entry" Type="Self.Entry" Multiplicity="1" />
+          <End Role="Reception" Type="Self.Reception" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entry">
+              <PropertyRef Name="Iid entry" />
+            </Principal>
+            <Dependent Role="Reception">
+              <PropertyRef Name="Id entry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id role" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="id role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ip21ModelContainer">
+          <EntitySet Name="Animals" EntityType="Self.Animals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Breed" EntityType="Self.Breed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client\animals" EntityType="Self.Client\animals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entry" EntityType="Self.Entry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reception" EntityType="Self.Reception" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Types of animals" EntityType="Self.Types of animals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Animals_Breed" Association="Self.FK_Animals_Breed">
+            <End Role="Breed" EntitySet="Breed" />
+            <End Role="Animals" EntitySet="Animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Breed_Types of animals" Association="Self.FK_Breed_Types of animals">
+            <End Role="Types of animals" EntitySet="Types of animals" />
+            <End Role="Breed" EntitySet="Breed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client\animals_Animals" Association="Self.FK_Client\animals_Animals">
+            <End Role="Animals" EntitySet="Animals" />
+            <End Role="Client\animals" EntitySet="Client\animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client\animals_Client" Association="Self.FK_Client\animals_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Client\animals" EntitySet="Client\animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entry_Client" Association="Self.FK_Entry_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Entry" EntitySet="Entry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entry_User" Association="Self.FK_Entry_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Entry" EntitySet="Entry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entry_User1" Association="Self.FK_Entry_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Entry" EntitySet="Entry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reception_Entry" Association="Self.FK_Reception_Entry">
+            <End Role="Entry" EntitySet="Entry" />
+            <End Role="Reception" EntitySet="Reception" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ip21Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Animals">
+          <Key>
+            <PropertyRef Name="Iid_animals" />
+          </Key>
+          <Property Name="Iid_animals" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="View" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Floor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_breed" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Breed" Relationship="Self.FK_Animals_Breed" FromRole="Animals" ToRole="Breed" />
+          <NavigationProperty Name="Client_animals" Relationship="Self.FK_Client_animals_Animals" FromRole="Animals" ToRole="Client_animals" />
+        </EntityType>
+        <EntityType Name="Breed">
+          <Key>
+            <PropertyRef Name="Iid_breed" />
+          </Key>
+          <Property Name="Iid_breed" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Id_types_of_animals" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Animals" Relationship="Self.FK_Animals_Breed" FromRole="Breed" ToRole="Animals" />
+          <NavigationProperty Name="Types_of_animals" Relationship="Self.FK_Breed_Types_of_animals" FromRole="Breed" ToRole="Types_of_animals" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client_animals" Relationship="Self.FK_Client_animals_Client" FromRole="Client" ToRole="Client_animals" />
+          <NavigationProperty Name="Entry" Relationship="Self.FK_Entry_Client" FromRole="Client" ToRole="Entry" />
+        </EntityType>
+        <EntityType Name="Client_animals">
+          <Key>
+            <PropertyRef Name="id_Client_animals" />
+          </Key>
+          <Property Name="id_Client_animals" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="id_animals" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Animals" Relationship="Self.FK_Client_animals_Animals" FromRole="Client_animals" ToRole="Animals" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_animals_Client" FromRole="Client_animals" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Entry">
+          <Key>
+            <PropertyRef Name="Iid_entry" />
+          </Key>
+          <Property Name="Iid_entry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_admina" Type="Int32" Nullable="false" />
+          <Property Name="Id_client" Type="Int32" Nullable="false" />
+          <Property Name="Date_reception" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time_reception" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_veterinarian" Type="Int32" Nullable="false" />
+          <Property Name="Id_animal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Entry_Client" FromRole="Entry" ToRole="Client" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Entry_User" FromRole="Entry" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Entry_User1" FromRole="Entry" ToRole="User" />
+          <NavigationProperty Name="Reception" Relationship="Self.FK_Reception_Entry" FromRole="Entry" ToRole="Reception" />
+        </EntityType>
+        <EntityType Name="Reception">
+          <Key>
+            <PropertyRef Name="Iid_reception" />
+          </Key>
+          <Property Name="Iid_reception" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_entry" Type="Int32" Nullable="false" />
+          <Property Name="Diagnosis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Recommendations" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Duration_of_treatment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prescription_of_medicines" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Entry" Relationship="Self.FK_Reception_Entry" FromRole="Reception" ToRole="Entry" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Types_of_animals">
+          <Key>
+            <PropertyRef Name="Iid_Types_of_animals" />
+          </Key>
+          <Property Name="Iid_Types_of_animals" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Species_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Breed" Relationship="Self.FK_Breed_Types_of_animals" FromRole="Types_of_animals" ToRole="Breed" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_role" Type="Int32" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Entry" Relationship="Self.FK_Entry_User" FromRole="User" ToRole="Entry" />
+          <NavigationProperty Name="Entry1" Relationship="Self.FK_Entry_User1" FromRole="User" ToRole="Entry" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_Animals_Breed">
+          <End Role="Breed" Type="Self.Breed" Multiplicity="1" />
+          <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Breed">
+              <PropertyRef Name="Iid_breed" />
+            </Principal>
+            <Dependent Role="Animals">
+              <PropertyRef Name="Id_breed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_animals_Animals">
+          <End Role="Animals" Type="Self.Animals" Multiplicity="1" />
+          <End Role="Client_animals" Type="Self.Client_animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animals">
+              <PropertyRef Name="Iid_animals" />
+            </Principal>
+            <Dependent Role="Client_animals">
+              <PropertyRef Name="id_animals" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Breed_Types_of_animals">
+          <End Role="Types_of_animals" Type="Self.Types_of_animals" Multiplicity="1" />
+          <End Role="Breed" Type="Self.Breed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types_of_animals">
+              <PropertyRef Name="Iid_Types_of_animals" />
+            </Principal>
+            <Dependent Role="Breed">
+              <PropertyRef Name="Id_types_of_animals" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_animals_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Client_animals" Type="Self.Client_animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Client_animals">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entry_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Entry" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="Id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entry_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Entry" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="Id_admina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entry_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Entry" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Entry">
+              <PropertyRef Name="Id_veterinarian" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reception_Entry">
+          <End Role="Entry" Type="Self.Entry" Multiplicity="1" />
+          <End Role="Reception" Type="Self.Reception" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entry">
+              <PropertyRef Name="Iid_entry" />
+            </Principal>
+            <Dependent Role="Reception">
+              <PropertyRef Name="Id_entry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Animals" EntityType="Self.Animals" />
+          <EntitySet Name="Breed" EntityType="Self.Breed" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Client_animals" EntityType="Self.Client_animals" />
+          <EntitySet Name="Entry" EntityType="Self.Entry" />
+          <EntitySet Name="Reception" EntityType="Self.Reception" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Types_of_animals" EntityType="Self.Types_of_animals" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Animals_Breed" Association="Self.FK_Animals_Breed">
+            <End Role="Breed" EntitySet="Breed" />
+            <End Role="Animals" EntitySet="Animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_animals_Animals" Association="Self.FK_Client_animals_Animals">
+            <End Role="Animals" EntitySet="Animals" />
+            <End Role="Client_animals" EntitySet="Client_animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Breed_Types_of_animals" Association="Self.FK_Breed_Types_of_animals">
+            <End Role="Types_of_animals" EntitySet="Types_of_animals" />
+            <End Role="Breed" EntitySet="Breed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_animals_Client" Association="Self.FK_Client_animals_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Client_animals" EntitySet="Client_animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entry_Client" Association="Self.FK_Entry_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Entry" EntitySet="Entry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entry_User" Association="Self.FK_Entry_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Entry" EntitySet="Entry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entry_User1" Association="Self.FK_Entry_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Entry" EntitySet="Entry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reception_Entry" Association="Self.FK_Reception_Entry">
+            <End Role="Entry" EntitySet="Entry" />
+            <End Role="Reception" EntitySet="Reception" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ip21ModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Animals">
+            <EntityTypeMapping TypeName="ip21Model.Animals">
+              <MappingFragment StoreEntitySet="Animals">
+                <ScalarProperty Name="Iid_animals" ColumnName="Iid animals" />
+                <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+                <ScalarProperty Name="Date_of_birth" ColumnName="Date of birth" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="View" ColumnName="View" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="Id_breed" ColumnName="Id breed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Breed">
+            <EntityTypeMapping TypeName="ip21Model.Breed">
+              <MappingFragment StoreEntitySet="Breed">
+                <ScalarProperty Name="Iid_breed" ColumnName="Iid breed" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id_types_of_animals" ColumnName="Id types of animals" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="ip21Model.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="id_client" ColumnName="id client" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client_animals">
+            <EntityTypeMapping TypeName="ip21Model.Client_animals">
+              <MappingFragment StoreEntitySet="Client\animals">
+                <ScalarProperty Name="id_Client_animals" ColumnName="id Client\animals" />
+                <ScalarProperty Name="id_client" ColumnName="id client" />
+                <ScalarProperty Name="id_animals" ColumnName="id animals" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entry">
+            <EntityTypeMapping TypeName="ip21Model.Entry">
+              <MappingFragment StoreEntitySet="Entry">
+                <ScalarProperty Name="Iid_entry" ColumnName="Iid entry" />
+                <ScalarProperty Name="Id_admina" ColumnName="Id admina" />
+                <ScalarProperty Name="Id_client" ColumnName="Id client" />
+                <ScalarProperty Name="Date_reception" ColumnName="Date reception" />
+                <ScalarProperty Name="Time_reception" ColumnName="Time reception" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="Id_veterinarian" ColumnName="Id veterinarian" />
+                <ScalarProperty Name="Id_animal" ColumnName="Id animal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reception">
+            <EntityTypeMapping TypeName="ip21Model.Reception">
+              <MappingFragment StoreEntitySet="Reception">
+                <ScalarProperty Name="Iid_reception" ColumnName="Iid reception" />
+                <ScalarProperty Name="Id_entry" ColumnName="Id entry" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="Recommendations" ColumnName="Recommendations" />
+                <ScalarProperty Name="Duration_of_treatment" ColumnName="Duration of treatment" />
+                <ScalarProperty Name="Prescription_of_medicines" ColumnName="Prescription of medicines" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="ip21Model.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="id_role" ColumnName="id role" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ip21Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types_of_animals">
+            <EntityTypeMapping TypeName="ip21Model.Types_of_animals">
+              <MappingFragment StoreEntitySet="Types of animals">
+                <ScalarProperty Name="Iid_Types_of_animals" ColumnName="Iid Types of animals" />
+                <ScalarProperty Name="Species_name" ColumnName="Species name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="ip21Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id_user" ColumnName="id user" />
+                <ScalarProperty Name="id_role" ColumnName="id role" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

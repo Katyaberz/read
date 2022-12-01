@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cfa97fb5ccf3479b994523c899a0a4c9" Name="Diagram1">
+        <EntityTypeShape EntityType="ip21Model.Animals" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip21Model.Breed" Width="1.5" PointX="1.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip21Model.Client" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip21Model.Client_animals" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip21Model.Entry" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip21Model.Reception" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip21Model.Role" Width="1.5" PointX="1.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip21Model.sysdiagrams" Width="1.5" PointX="3.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip21Model.Types_of_animals" Width="1.5" PointX="1.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip21Model.User" Width="1.5" PointX="3.75" PointY="15.5" IsExpanded="true" />
+        <AssociationConnector Association="ip21Model.FK_Animals_Breed" ManuallyRouted="false" />
+        <AssociationConnector Association="ip21Model.FK_Client_animals_Animals" ManuallyRouted="false" />
+        <AssociationConnector Association="ip21Model.FK_Breed_Types_of_animals" ManuallyRouted="false" />
+        <AssociationConnector Association="ip21Model.FK_Client_animals_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="ip21Model.FK_Entry_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="ip21Model.FK_Entry_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ip21Model.FK_Entry_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="ip21Model.FK_Reception_Entry" ManuallyRouted="false" />
+        <AssociationConnector Association="ip21Model.FK_User_Role" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
